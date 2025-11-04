@@ -112,7 +112,7 @@ Where:
 
 **Cost Function (Mean Squared Error):**
 ```
-J(θ₀, θ₁) = (1/2m) × Σ(estimatePrice(mileage[i]) - price[i])²
+J(θ₀, θ₁) = (1/(2m)) × Σ(estimatePrice(mileage[i]) - price[i])²
 ```
 
 The algorithm stops when cost improvement falls below the threshold or max iterations is reached.
