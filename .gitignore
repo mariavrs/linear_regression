@@ -1,3 +1,7 @@
+# Linear regression files
+model.json
+linear_regression.pdf
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
