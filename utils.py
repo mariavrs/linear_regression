@@ -4,9 +4,14 @@ def read_data(file_path):
 	x, y = [], []
 	with open(file_path, mode='r') as file:
 		reader = csv.DictReader(file, skipinitialspace=True)
+
 		for row in reader:
 			x.append(float(row["km"]))
 			y.append(float(row["price"]))
+
+	if not x or not y:
+		raise ValueError(f"Error: The CSV file '{file_path}' is empty or contains no valid data.")
+
 	return x, y
 
 def estimate_price(km, theta0, theta1):
