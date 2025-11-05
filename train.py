@@ -41,7 +41,7 @@ def train_model(x, y):
 	# Print final values if didn't converge
 	if iteration == MAX_ITERATIONS - 1:
 		print(f"\033[93mReached max iterations without full convergence (final cost: {cost:.9f})\033[0m")
-	
+
 	return theta0, theta1
 
 def main():

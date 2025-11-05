@@ -26,7 +26,11 @@ def main():
 	if model is None:
 		return 1
 
-	x, y = read_data("data.csv")
+	try:
+		x, y = read_data("data.csv")
+	except Exception as e:
+		print(f"\033[91mError reading data: {e}\033[0m")
+		return 1
 
 	print("[1] Evaluating model precision...")
 

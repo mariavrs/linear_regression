@@ -1,16 +1,36 @@
 import csv, json
 
+MAX_MILEAGE = 1e10
+MAX_PRICE = 1e15
+
 def read_data(file_path):
 	x, y = [], []
 	with open(file_path, mode='r') as file:
 		reader = csv.DictReader(file, skipinitialspace=True)
 
-		for row in reader:
-			x.append(float(row["km"]))
-			y.append(float(row["price"]))
+		for i, row in enumerate(reader):
+			try:
+				km = float(row["km"])
+				price = float(row["price"])
+			except ValueError as e:
+				raise ValueError(f"Invalid data format at row {i}: {e}")
+			except OverflowError:
+				raise ValueError(f"Numeric value out of range at row {i}")
+
+			if km < 0:
+				raise ValueError(f"Invalid km value '{km}' at row {i}. Mileage must be non-negative.")
+			elif km > MAX_MILEAGE:
+				raise ValueError(f"Invalid km value '{km}' at row {i}. Mileage exceeds maximum limit.")
+			if price < 0:
+				raise ValueError(f"Invalid price value '{price}' at row {i}. Price must be non-negative.")
+			elif price > MAX_PRICE:
+				raise ValueError(f"Invalid price value '{price}' at row {i}. Price exceeds maximum limit.")
+
+			x.append(km)
+			y.append(price)
 
 	if not x or not y:
-		raise ValueError(f"Error: The CSV file '{file_path}' is empty or contains no valid data.")
+		raise ValueError(f"The CSV file '{file_path}' is empty or contains no valid data.")
 
 	return x, y
 
