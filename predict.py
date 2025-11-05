@@ -17,7 +17,12 @@ def main():
 		return 1
 
 	price = estimate_price(mileage, theta0, theta1)
-	print(f"\033[92mEstimated price for {mileage} km: {price}\033[0m")
+
+	if price < 0:
+		print(f"\033[93mWarning: Predicted price is negative ({price:.2f}). The mileage may be outside the training data range.\033[0m")
+		price = 0
+	
+	print(f"\033[92mEstimated price for {mileage} km: {price:.2f}\033[0m")
 
 	return 0
 
